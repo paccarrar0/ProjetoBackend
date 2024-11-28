@@ -1,3 +1,6 @@
+
+
+/*
 document.addEventListener("DOMContentLoaded", function () {
   const imagePreviewInput = document.getElementById("image_preview_input");
   const preview = document.getElementById("image_preview");
@@ -24,3 +27,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+*/
