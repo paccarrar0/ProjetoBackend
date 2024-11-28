@@ -16,7 +16,7 @@ class HomeController extends Controller
         $this->current_user = $this->getCurrentUser();
     }
 
-    protected function getCurrentUser(): ?\App\Models\User
+    public function getCurrentUser(): ?\App\Models\User
     {
         return Auth::user();
     }

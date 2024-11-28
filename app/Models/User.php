@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Lib\Validations;
 use Core\Database\ActiveRecord\Model;
+use PhpParser\Node\Expr\Cast\Object_;
 
 /**
  * @property int $id
@@ -26,6 +27,8 @@ class User extends Model
         "token_expiration",
         "validation_token"
     ];
+
+    protected array $errors = [];
 
     protected ?string $password = null;
     protected ?string $password_confirmation = null;
@@ -61,18 +64,28 @@ class User extends Model
         return User::findBy(['email' => $email]);
     }
 
+    public function addError(string $attribute, string $message): void
+    {
+        $this->errors[] = "{$attribute} {$message}";
+    }
+
+    /**
+    *@return string[] List of error messages, each as a string.
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+
     public function __set(string $property, mixed $value): void
     {
         parent::__set($property, $value);
-
-
 
         if (
             $property === 'password' &&
             $this->newRecord() &&
             $value !== null && $value !== ''
         ) {
-            error_log("property: $property, value: $value");
             $this->encrypted_password = password_hash($value, PASSWORD_DEFAULT);
         }
     }
