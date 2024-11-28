@@ -9,7 +9,7 @@ class Validations
     public static function notEmpty($attribute, $obj)
     {
         if ($obj->$attribute === null || $obj->$attribute === '') {
-            $obj->addError($attribute, 'não pode ser vazio!');
+            $obj->addError($attribute, 'cannot be empty!');
             return false;
         }
 
@@ -19,7 +19,7 @@ class Validations
     public static function passwordConfirmation($obj)
     {
         if ($obj->password !== $obj->password_confirmation) {
-            $obj->addError('password', 'as senhas devem ser idênticas!');
+            $obj->addError('password', 'passwords need to be identical!');
             return false;
         }
 
@@ -50,7 +50,7 @@ class Validations
 
         if ($stmt->rowCount() !== 0) {
             foreach ($fields as $field) {
-                $object->addError($field, 'já existe um registro com esse dado');
+                $object->addError($field, 'has already been taken!');
             }
             return false;
         }

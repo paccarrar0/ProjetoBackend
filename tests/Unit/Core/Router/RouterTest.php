@@ -132,7 +132,7 @@ class RouterTest extends TestCase
     public function test_get_route_size(): void
     {
         $router = Router::getInstance();
-        $route = $this->createMock(Route::class);
+        $route = new Route('GET', '/test', MockController::class, 'action');
 
         $router->addRoute($route);
         $router->addRoute($route);
@@ -143,8 +143,8 @@ class RouterTest extends TestCase
     public function test_get_route(): void
     {
         $router = Router::getInstance();
-        $route1 = $this->createMock(Route::class);
-        $route2 = $this->createMock(Route::class);
+        $route1 = new Route('GET', '/test1', MockController::class, 'action');
+        $route2 = new Route('GET', '/test2', MockController::class, 'action');
 
         $router->addRoute($route1);
         $router->addRoute($route2);

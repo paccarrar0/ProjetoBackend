@@ -1,8 +1,8 @@
-## Problem Track
+## Equipment Reservation Management System(ERMS)
 
-"Problem Track" is the ultimate solution for organizations seeking to enhance their problem resolution processes, drive operational efficiency, and deliver exceptional customer experiences.
+The Equipment Reservation Management System (ERMS) is a web platform that makes managing equipment rentals easier, allowing users to make reservations, return items, and track the status of their items in real time.
 
-### Dependências
+### Dependencies
 
 - Docker
 - Docker Compose
@@ -12,8 +12,8 @@
 #### Clone Repository
 
 ```
-$ git clone git@github.com:SI-DABE/problem-track.git
-$ cd problem-track
+$ git clone git@github.com:paccarrar0/ProjetoBackend.git
+$ cd ProjetoBackend
 ```
 
 #### Define the env variables
@@ -52,19 +52,13 @@ $ ./run db:reset
 $ ./run db:populate
 ```
 
-### Fixed uploads folder permission
-
-```
-sudo chown www-data:www-data public/assets/uploads
-```
-
 #### Run the tests
 
 ```
 $ docker compose run --rm php ./vendor/bin/phpunit tests --color
 ```
 
-ou
+or
 
 ```
 $ ./run test
@@ -82,12 +76,4 @@ $ ./run phpcs
 
 ```
 $ ./run phpstan
-```
-
-Access [localhost](http://localhost)
-
-### Teste de API
-
-```shell
-curl -H "Accept: application/json" localhost/problems
 ```
