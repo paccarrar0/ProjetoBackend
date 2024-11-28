@@ -18,6 +18,4 @@ Route::middleware('auth')->group(function () {
     $adminMiddleware->group(function () {
         Route::get('/admin', [HomeController::class, 'adminUser'])->name('users.admin');
     });
-    
 });
-

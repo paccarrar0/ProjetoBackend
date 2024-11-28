@@ -9,15 +9,14 @@ use Lib\FlashMessage;
 
 class HomeController extends Controller
 {
-
-    protected $current_user;
+    protected ?\App\Models\User $current_user;
 
     public function __construct()
     {
         $this->current_user = $this->getCurrentUser();
     }
 
-    protected function getCurrentUser()
+    protected function getCurrentUser(): ?\App\Models\User
     {
         return Auth::user();
     }

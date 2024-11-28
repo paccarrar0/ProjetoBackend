@@ -13,12 +13,19 @@ use Core\Database\ActiveRecord\Model;
  * @property string $role
  * @property string $token_expiration
  * @property string $validation_token
- * 
+ *
  * */
 class User extends Model
 {
     protected static string $table = 'users';
-    protected static array $columns = ['name', 'email', 'encrypted_password', "role", "token_expiration", "validation_token"];
+    protected static array $columns = [
+        'name',
+        'email',
+        'encrypted_password',
+        "role",
+        "token_expiration",
+        "validation_token"
+    ];
 
     protected ?string $password = null;
     protected ?string $password_confirmation = null;
@@ -57,8 +64,8 @@ class User extends Model
     public function __set(string $property, mixed $value): void
     {
         parent::__set($property, $value);
-            
-        
+
+
 
         if (
             $property === 'password' &&
