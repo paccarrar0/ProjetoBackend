@@ -13,6 +13,8 @@ Route::get('/', [HomeController::class, 'guestUser'])->name('index');
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthenticationsController::class, 'destroy'])->name('users.logout');
 
+    Route::get('/common', [HomeController::class, 'commonUser'])->name('users.common');
+
     //Admin Routes
     $adminMiddleware = Route::middleware('admin');
     $adminMiddleware->group(function () {
