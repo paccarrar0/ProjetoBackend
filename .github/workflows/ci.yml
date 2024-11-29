@@ -24,7 +24,7 @@ jobs:
         run: ./run test tests/Unit
 
       - name: PHPUnit Browser tests
-        run:
+        run: |
         ./run up -d
         ./run test tests/Browser
 
