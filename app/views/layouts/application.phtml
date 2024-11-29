@@ -24,12 +24,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Reports</a>
-                    </li>
+
+                    <?php if ($this->current_user && $this->current_user->isAdmin()) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Reports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Equipments</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if ($this->current_user && !$this->current_user->isAdmin()) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Equipments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Reservations</a>
+                        </li>
+                    <?php endif; ?>
                     <?php if ($this->current_user) : ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,9 +59,12 @@
                             </ul>
                         </li>
                     <?php else : ?>
-                        <a class="nav-link active" href="<? echo route('users.login') ?>">
-                            Login
-                        </a>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Equipments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="<? echo route('users.login') ?>">Login</a>
+                        </li>
                     <?php endif; ?>
                 </ul>
                 <form class="d-flex" role="search">

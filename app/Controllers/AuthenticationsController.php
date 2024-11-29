@@ -31,7 +31,7 @@ class AuthenticationsController extends Controller
             if ($user->isAdmin()) {
                 $this->redirectTo(route('users.admin'));
             } else {
-                $this->redirectTo(route('index')); //Change to "users.user" after create common user authentication
+                $this->redirectTo(route('users.common'));
             }
         } else {
             FlashMessage::danger('E-mail or password invalid!');

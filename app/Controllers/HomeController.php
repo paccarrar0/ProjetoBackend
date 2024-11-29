@@ -32,4 +32,10 @@ class HomeController extends Controller
         $title = 'Admin';
         $this->render('home/admin', compact('title'));
     }
+
+    public function commonUser(Request $request): void
+    {
+        $title = 'Common';
+        $this->render('home/common', compact('title'));
+    }
 }
