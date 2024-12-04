@@ -33,7 +33,7 @@
                             <a class="nav-link active" href="#">Reports</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Equipments</a>
+                            <a class="nav-link active" href="<?php echo route("equipments.index")?>">Equipments</a>
                         </li>
                     <?php endif; ?>
                     <?php if ($this->current_user && !$this->current_user->isAdmin()) : ?>

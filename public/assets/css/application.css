@@ -2,6 +2,13 @@ body {
   margin-top: 0px;
 }
 
+.equipment-list {
+  border: 1px #19a8ff solid;
+  border-radius: 6px;
+  padding: 10px;
+  height: 80%;
+}
+
 #main-content {
   padding-top: 5px;
   margin-left: 250px;

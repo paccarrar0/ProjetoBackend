@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\AuthenticationsController;
+use App\Controllers\EquipmentController;
 use App\Controllers\HomeController;
 use Core\Router\Route;
 
@@ -19,5 +20,6 @@ Route::middleware('auth')->group(function () {
     $adminMiddleware = Route::middleware('admin');
     $adminMiddleware->group(function () {
         Route::get('/admin', [HomeController::class, 'adminUser'])->name('users.admin');
+        Route::get('/admin/equipments', [EquipmentController::class, 'index'])->name('equipments.index');
     });
 });

@@ -19,7 +19,6 @@ class AuthenticatedTest extends FrameworkTestCase
 
     public function test_should_allow_access_if_authenticated(): void
     {
-      // Simulate authenticated request
         $opts = [
         "http" => [
         "header" => "Cookie: valid_session_cookie"
