@@ -1,10 +1,12 @@
- <div class="container">
-   <div class="mt-5 equipment-list">
-     <?php foreach ($equipments as $item): ?>
-       <div class="equipment-item">
-         <h2><?= htmlspecialchars($item->name) ?></h2>
-         <p><?= htmlspecialchars($item->description) ?></p>
-       </div>
-     <?php endforeach; ?>
-   </div>
- </div>
+<div class="container">
+  <div class="row mt-5 equipment-list">
+    <?php foreach ($equipments as $item): ?>
+      <div class="col-md-6 my-2">
+        <div class="equipment-item border-opacity-25">
+          <h2><?= $item["name"] ?></h2>
+          <p><?= $item["category"] ?></p>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  </div>
+</div>

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Equipment;
 use Core\Http\Controllers\Controller;
 use Core\Http\Request;
 use Lib\Authentication\Auth;
@@ -22,9 +23,18 @@ class EquipmentController extends Controller
     return Auth::user();
   }
 
-  public function index(): void {
+  public function index(): void
+  {
     $equipment = new \App\Models\Equipment();
     $equipments = $equipment->getAllEquipments();
+
+    $jsonEquipments = [];
+    /*
+    foreach ($equipments as $item) {
+      $jsonEquipments[] = json_encode($item);
+    }*/
+
+    //dd($jsonEquipments);
 
     $this->render('equipments/index', ['equipments' => $equipments]);
   }

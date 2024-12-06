@@ -12,7 +12,7 @@ class EquipmentsPopulate
       'name' => 'Furadeira',
       'description' => 'Furadeira de impacto',
       'category' => 'Ferramentas',
-      'status' => 'Disponível',
+      'status' => 'available',
       'rental_price' => 10.00,
       'location' => 'São Paulo',
       'serial_number' => '123456'
@@ -28,10 +28,10 @@ class EquipmentsPopulate
         'name' => 'Furadeira ' . $i,
         'description' => 'Furadeira de impacto ' . $i,
         'category' => 'Ferramentas',
-        'status' => 'Disponível',
+        'status' => 'available',
         'rental_price' => 10.00,
         'location' => 'São Paulo',
-        'serial_number' => '123456'
+        'serial_number' => '123456' . $i
       ];
 
       $equipment = new Equipment($data);

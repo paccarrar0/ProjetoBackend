@@ -50,4 +50,30 @@ class Equipment extends Model
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function getRentalPrice(): float
+    {
+        return $this->rental_price;
+    }
+
+    public function getLocation(): string
+    {
+        return $this->location;
+    }
+
+    public function getSerialNumber(): string
+    {
+        return $this->serial_number;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 }
