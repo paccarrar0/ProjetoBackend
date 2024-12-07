@@ -6,6 +6,7 @@ use App\Models\Equipment;
 use Core\Http\Controllers\Controller;
 use Core\Http\Request;
 use Lib\Authentication\Auth;
+use Lib\FlashMessage;
 
 class EquipmentController extends Controller
 {
@@ -28,20 +29,29 @@ class EquipmentController extends Controller
     $equipment = new \App\Models\Equipment();
     $equipments = $equipment->getAllEquipments();
 
-    $jsonEquipments = [];
-    /*
-    foreach ($equipments as $item) {
-      $jsonEquipments[] = json_encode($item);
-    }*/
-
-    //dd($jsonEquipments);
-
     $this->render('equipments/index', ['equipments' => $equipments]);
   }
 
   public function new(): void
   {
     $this->render('equipments/new');
+  }
+
+  public function create(Request $request): void
+  {
+
+    $params = $request->getParams();
+
+    $equipment = new Equipment($params['equipment']);
+
+    if ($equipment->save()) {
+      dd($equipment);
+      FlashMessage::success('Equipment created successfully');
+      $this->redirectTo(route('equipments.index'));
+    } else {
+      dd($equipment->save());
+      $this->redirectTo(route('equipments.new'));
+    }
   }
 
   public function store(): void

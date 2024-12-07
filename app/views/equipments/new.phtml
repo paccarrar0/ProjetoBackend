@@ -1,1 +1,39 @@
-<p>Teste dessa merda</p>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between mt-5">
+    <h1>New Equipment</h1>
+    <div class="w-10 align-content-center">
+      <button type="submit" class="btn btn-primary btn-block" onclick="document.getElementById('newEquipmentForm').submit();">Submit</button>
+    </div>
+  </div>
+  <form action="<?php echo route('equipments.create') ?>" method="POST" class="mt-1" id="newEquipmentForm">
+    <div class="mb-3">
+      <label for="equipmentNameInput" class="form-label">Equipment Name</label>
+      <input name="equipment[name]" type="text" class="form-control" id="equipmentNameInput" aria-describedby="nameHelp">
+    </div>
+    <div class="mb-3">
+      <label for="equipmentDescriptionInput" class="form-label">Description</label>
+      <textarea name="equipment[description]" type="text" class="form-control" id="equipmentDescriptionInput"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="equipmentCategoryInput" class="form-label">Category</label>
+      <input name="equipment[category]" type="text" class="form-control" id="exampleInputPassword1">
+    </div>
+
+    <div class="mb-3">
+      <label for="equipmentPriceInput" class="form-label">Rental Price</label>
+      <input name="equipment[rental_price]" type="text" class="form-control" id="equipmentPriceInput">
+    </div>
+    <div class="mb-3">
+      <label for="equipmentLocationInput" class="form-label">Location</label>
+      <input name="equipment[location]" type="text" class="form-control" id="equipmentCategoryInput">
+    </div>
+    <div class="mb-3">
+      <label for="equipmentSerialNumberInput" class="form-label">Serial Number</label>
+      <input name="equipment[serial_number]" type="text" class="form-control" id="equipmentSerialNumberInput">
+    </div>
+    <div class="mb-3">
+      <label for="equipmentImageInput" class="form-label">Image</label>
+      <input name="equipment[image_path]" type="text" class="form-control" id="equipmentSerialNumberInput">
+    </div>
+  </form>
+</div>

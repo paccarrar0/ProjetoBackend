@@ -13,10 +13,13 @@
     <link rel="stylesheet" href="/assets/css/application.css">
 </head>
 
-<body class="">
-    <?php require '_flash_message.phtml'; ?>
-
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+<body>
+    <div class="container d-flex justify-content-center position-fixed start-50 translate-middle">
+        <div class="w-50">
+            <?php require '_flash_message.phtml'; ?>
+        </div>
+    </div>
+    <nav class="nav navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><span class="text-primary fs-1">ERMS</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +36,7 @@
                             <a class="nav-link active" href="#">Reports</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="<?php echo route("equipments.index")?>">Equipments</a>
+                            <a class="nav-link active" href="<?php echo route("equipments.index") ?>">Equipments</a>
                         </li>
                     <?php endif; ?>
                     <?php if ($this->current_user && !$this->current_user->isAdmin()) : ?>
@@ -75,7 +78,9 @@
         </div>
     </nav>
 
-    <?php require $view ?>
+    <div class="view">
+        <?php require $view ?>
+    </div>
 </body>
 
 </html>

@@ -21,5 +21,7 @@ Route::middleware('auth')->group(function () {
     $adminMiddleware->group(function () {
         Route::get('/admin', [HomeController::class, 'adminUser'])->name('users.admin');
         Route::get('/admin/equipments', [EquipmentController::class, 'index'])->name('equipments.index');
+        Route::get('/admin/equipments/new', [EquipmentController::class, 'new'])->name('equipments.new');
+        Route::post('/admin/equipments', [EquipmentController::class, 'create'])->name('equipments.create');
     });
 });

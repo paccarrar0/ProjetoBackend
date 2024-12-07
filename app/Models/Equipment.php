@@ -15,6 +15,7 @@ use PDO;
  * @property float $rental_price
  * @property string $location
  * @property string $serial_number
+ * @property string $image_path
  */
 
 class Equipment extends Model
@@ -28,7 +29,8 @@ class Equipment extends Model
         'status',
         'rental_price',
         'location',
-        'serial_number'
+        'serial_number',
+        'image_path'
     ];
 
 
@@ -41,6 +43,7 @@ class Equipment extends Model
         Validations::notEmpty('rental_price', $this);
         Validations::notEmpty('location', $this);
         Validations::notEmpty('serial_number', $this);
+        Validations::notEmpty('image_path', $this);
     }
 
     public function getAllEquipments(): array
@@ -50,30 +53,4 @@ class Equipment extends Model
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function getRentalPrice(): float
-    {
-        return $this->rental_price;
-    }
-
-    public function getLocation(): string
-    {
-        return $this->location;
-    }
-
-    public function getSerialNumber(): string
-    {
-        return $this->serial_number;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
 }
