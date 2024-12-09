@@ -1,12 +1,12 @@
 <div class="container mt-5">
-  <form class="mb-5" action="<?php echo route('equipments.create') ?>" method="POST" class="mt-1 needs-validation" id="newEquipmentForm" novalidate>
+  <form class="mb-5" action="<?php echo route('equipments.update', ['id' => $equipment['id']]) ?>" method="POST" class="mt-1 needs-validation" id="newEquipmentForm" novalidate>
     <div class="d-flex justify-content-between mb-4 mt-5">
-      <h1>New Equipment</h1>
+      <h1>Edit Equipment</h1>
       <div class="w-10 align-content-center">
-        <button type="submit" class="btn btn-primary btn-block" id="newSubmitBtn">Submit</button>
+        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Submit</button>
       </div>
     </div>
-
+    <input type="hidden" name="_method" value="PUT">
     <div class="mb-3">
       <label for="equipmentNameInput" class="form-label">Equipment Name</label>
       <input name="equipment[name]" type="text" class="form-control" id="equipmentNameInput" aria-describedby="nameHelp" required>
@@ -46,11 +46,6 @@
       <label for="equipmentLocationInput" class="form-label">Location</label>
       <input name="equipment[location]" type="text" class="form-control" id="equipmentLocationInput" required>
       <div class="invalid-feedback">Please specify the location.</div>
-    </div>
-    <div class="mb-3">
-      <label for="equipmentSerialNumberInput" class="form-label">Serial Number</label>
-      <input name="equipment[serial_number]" type="text" class="form-control" id="equipmentSerialNumberInput" required>
-      <div class="invalid-feedback">Please provide the serial number.</div>
     </div>
     <div class="mb-3">
       <label for="equipmentImageInput" class="form-label">Image</label>

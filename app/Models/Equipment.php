@@ -46,11 +46,54 @@ class Equipment extends Model
         Validations::notEmpty('image_path', $this);
     }
 
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+
     public function getAllEquipments(): array
     {
         $query = "SELECT * FROM equipments";
         $stmt = Database::getDatabaseConn()->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @param int $id
+     * @return array<string, mixed>
+     */
+
+    public function getEquipmentById(int $id): ?array
+    {
+        $query = "SELECT * FROM equipments WHERE id = :id";
+        $stmt = Database::getDatabaseConn()->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     * @return self $equipment
+     */
+
+    public static function toObject(array $data): self
+    {
+        $equipment = new self();
+        foreach ($data as $key => $value) {
+            if ($key !== 'created_at' && $key !== 'updated_at') {
+                $equipment->$key = $value;
+            }
+        }
+        return $equipment;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+
+    public function getErrors(): array
+    {
+        return $this->errors;
     }
 }
