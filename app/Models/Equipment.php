@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use Core\Database\ActiveRecord\Model;
-use Core\Database\Database;
 use Lib\Validations;
-use PDO;
 
 /**
  * @property string $name
@@ -52,10 +50,7 @@ class Equipment extends Model
 
     public function getAllEquipments(): array
     {
-        $query = "SELECT * FROM equipments";
-        $stmt = Database::getDatabaseConn()->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->all();
     }
 
     /**
@@ -63,13 +58,25 @@ class Equipment extends Model
      * @return array<string, mixed>
      */
 
-    public function getEquipmentById(int $id): ?array
+    public static function getEquipmentById(int $id): ?array
     {
-        $query = "SELECT * FROM equipments WHERE id = :id";
-        $stmt = Database::getDatabaseConn()->prepare($query);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $equipment = self::findById($id);
+
+        if ($equipment === null) {
+            return null;
+        }
+
+        return [
+            'id' => $equipment->id,
+            'name' => $equipment->name,
+            'description' => $equipment->description,
+            'category' => $equipment->category,
+            'status' => $equipment->status,
+            'rental_price' => $equipment->rental_price,
+            'location' => $equipment->location,
+            'serial_number' => $equipment->serial_number,
+            'image_path' => $equipment->image_path
+        ];
     }
 
     /**

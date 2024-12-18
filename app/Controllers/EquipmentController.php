@@ -40,8 +40,8 @@ class EquipmentController extends Controller
     {
 
         $params = $request->getParams();
-
         $equipment = new Equipment($params['equipment']);
+
 
         if ($equipment->save()) {
             FlashMessage::success('Equipment created successfully');
@@ -73,49 +73,33 @@ class EquipmentController extends Controller
     public function update(Request $request): void
     {
         $params = $request->getParams();
-        $equipment = new \App\Models\Equipment();
-        $equipment = Equipment::toObject($equipment->getEquipmentById($params['id']));
+        $equipmentData = $params['equipment'] ?? [];
 
-        $params['equipment']['name'] !== '' ?
-        $equipment->name = $params['equipment']['name']
-        :
-        $equipment->name = $equipment->name;
-        $params['equipment']['description'] !== '' ?
-        $equipment->description = $params['equipment']['description']
-        :
-        $equipment->description = $equipment->description;
-        $params['equipment']['category'] !== '' ?
-        $equipment->category = $params['equipment']['category']
-        :
-        $equipment->category = $equipment->category;
-        $params['equipment']['status'] !== '' ?
-        $equipment->status = $params['equipment']['status']
-        :
-        $equipment->status = $equipment->status;
-        $params['equipment']['rental_price'] !== '' ?
-        $equipment->rental_price = $params['equipment']['rental_price']
-        :
-        $equipment->rental_price = $equipment->rental_price;
-        $params['equipment']['location'] !== '' ?
-        $equipment->location = $params['equipment']['location']
-        :
-        $equipment->location = $equipment->location;
+        $equipment = Equipment::toObject(Equipment::getEquipmentById($params['id']));
+
+        if (!$equipment) {
+            FlashMessage::danger('Equipment not found');
+            $this->redirectTo(route('equipments.index'));
+            return;
+        }
+
+        foreach ($equipmentData as $key => $value) {
+            if ($value !== '') {
+                $equipment->$key = $value;
+            }
+        }
 
         $equipment->serial_number = $equipment->serial_number;
-
-        $params['equipment']['image_path'] !== '' ?
-        $equipment->image_path = $params['equipment']['image_path']
-        :
-        $equipment->image_path = $equipment->image_path;
 
         if ($equipment->save()) {
             FlashMessage::success('Equipment updated successfully');
             $this->redirectTo(route('equipments.index'));
         } else {
             FlashMessage::danger('Failed to update equipment');
-            $this->redirectTo(route('equipments.edit'));
+            $this->redirectTo(route('equipments.edit', ['id' => $params['id']]));
         }
     }
+
 
     public function destroy(Request $request): void
     {
