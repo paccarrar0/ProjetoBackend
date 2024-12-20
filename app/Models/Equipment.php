@@ -37,7 +37,7 @@ class Equipment extends Model
             $this->errors['rental_price'] = 'Price must be a number';
         }
 
-        if($this->rental_price < 0) {
+        if ($this->rental_price < 0) {
             $this->errors['rental_price'] = 'Price must be greater than 0';
         }
     }
