@@ -1,0 +1,52 @@
+<div class="container mt-5">
+  <form class="mb-5 mt-1" action="<?= route('equipments.update', ['id' => $equipment['id']]) ?>" method="POST" id="newEquipmentForm" novalidate>
+    <div class="d-flex justify-content-between mb-4 mt-5">
+      <h1>Edit Equipment</h1>
+      <div class="w-10 align-content-center">
+        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Submit</button>
+      </div>
+    </div>
+    <input type="hidden" name="_method" value="PUT">
+    <div class="mb-3">
+      <label for="equipmentNameInput" class="form-label">Equipment Name</label>
+      <input value="<?= $equipment['name'] ?>" name="equipment[name]" type="text" class="form-control" id="equipmentNameInput" aria-describedby="nameHelp">
+    </div>
+    <div class="mb-3">
+      <label for="equipmentDescriptionInput" class="form-label">Description</label>
+      <textarea name="equipment[description]" class="form-control" id="equipmentDescriptionInput" rows="12" required>
+        <?= $equipment['description'] ?>
+      </textarea>
+    </div>
+    <div class="mb-3">
+      <label for="equipmentCategoryInput" class="form-label">Category</label>
+      <input value="<?= $equipment['category'] ?>" name="equipment[category]" type="text" class="form-control" id="equipmentCategoryInput">
+    </div>
+    <div class="mb-3">
+      <label for="equipmentStatusInput" id="equipmentStatusInput" class="form-label">Status</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="equipment[status]" id="equipmentAvailableRadio" value="available" <?php if ($equipment['status'] == 'available') echo 'checked' ?>>
+        <label class="form-check-label" for="equipmentAvailableRadio">Available</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="equipment[status]" id="equipmentMaintenanceRadio" value="maintenance" <?php if ($equipment['status'] == 'maintenance') echo 'checked' ?>>
+        <label class="form-check-label" for="equipmentMaintenanceRadio">Maintenance</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="equipment[status]" id="equipmentInUseRadio" value="in_use" <?php if ($equipment['status'] == 'in_use') echo 'checked' ?>>
+        <label class="form-check-label" for="equipmentInUseRadio">In Use</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="equipmentPriceInput" class="form-label">Rental Price</label>
+      <input value="<?= $equipment['rental_price'] ?>" name="equipment[rental_price]" type="text" class="form-control" id="equipmentPriceInput">
+    </div>
+    <div class="mb-3">
+      <label for="equipmentLocationInput" class="form-label">Location</label>
+      <input value="<?= $equipment['location'] ?>" name="equipment[location]" type="text" class="form-control" id="equipmentLocationInput">
+    </div>
+    <div class="mb-3">
+      <label for="equipmentImageInput" class="form-label">Image</label>
+      <input value="<?= $equipment['image_path'] ?>" name="equipment[image_path]" type="text" class="form-control" id="equipmentImageInput">
+    </div>
+  </form>
+</div>

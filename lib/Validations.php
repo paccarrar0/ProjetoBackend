@@ -33,7 +33,7 @@ class Validations
         }
 
         $table = $object::table();
-        $conditions = implode(' AND ', array_map(fn ($field) => "{$field} = :{$field}", $fields));
+        $conditions = implode(' AND ', array_map(fn($field) => "{$field} = :{$field}", $fields));
 
         $sql = <<<SQL
             SELECT id FROM {$table} WHERE {$conditions};

@@ -31,10 +31,10 @@ CREATE TABLE equipments (
     status ENUM('available', 'in_use', 'maintenance') DEFAULT 'available',
     rental_price DECIMAL(10,2) NOT NULL,
     location VARCHAR(255) DEFAULT NULL,
-    serial_number VARCHAR(255) UNIQUE DEFAULT NULL,
+    serial_number VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    image_path VARCHAR(255) UNIQUE DEFAULT NULL
+    image_path VARCHAR(2048) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criar tabela `reservations`

@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <form class="mb-5" action="<?php echo route('equipments.create') ?>" method="POST" class="mt-1 needs-validation" id="newEquipmentForm" novalidate>
+    <div class="d-flex justify-content-between mb-4 mt-5">
+      <h1>New Equipment</h1>
+      <div class="w-10 align-content-center">
+        <button type="submit" class="btn btn-primary btn-block" id="newSubmitBtn">Submit</button>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="equipmentNameInput" class="form-label">Equipment Name</label>
+      <input name="equipment[name]" type="text" class="form-control" id="equipmentNameInput" aria-describedby="nameHelp" required>
+      <div class="invalid-feedback">Please provide a name.</div>
+    </div>
+    <div class="mb-3">
+      <label for="equipmentDescriptionInput" class="form-label">Description</label>
+      <textarea name="equipment[description]" class="form-control" id="equipmentDescriptionInput" required></textarea>
+      <div class="invalid-feedback">Please provide a description.</div>
+    </div>
+    <div class="mb-3">
+      <label for="equipmentCategoryInput" class="form-label">Category</label>
+      <input name="equipment[category]" type="text" class="form-control" id="equipmentCategoryInput" required>
+      <div class="invalid-feedback">Please specify the category.</div>
+    </div>
+    <div class="mb-3">
+      <label for="equipmentStatusInput" id="equipmentStatusInput" class="form-label">Status</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="equipment[status]" id="equipmentAvailableRadio" value="available" checked>
+        <label class="form-check-label" for="equipmentAvailableRadio">Available</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="equipment[status]" id="equipmentMaintenanceRadio" value="maintenance">
+        <label class="form-check-label" for="equipmentMaintenanceRadio">Maintenance</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="equipment[status]" id="equipmentInUseRadio" value="in_use">
+        <label class="form-check-label" for="equipmentInUseRadio">In Use</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="equipmentPriceInput" class="form-label">Rental Price</label>
+      <input name="equipment[rental_price]" type="text" class="form-control" id="equipmentPriceInput" pattern="^\d+(\.\d{1,2})?$" required>
+      <div class="invalid-feedback">Please enter a valid price.</div>
+    </div>
+    <div class="mb-3">
+      <label for="equipmentLocationInput" class="form-label">Location</label>
+      <input name="equipment[location]" type="text" class="form-control" id="equipmentLocationInput" required>
+      <div class="invalid-feedback">Please specify the location.</div>
+    </div>
+    <div class="mb-3">
+      <label for="equipmentSerialNumberInput" class="form-label">Serial Number</label>
+      <input name="equipment[serial_number]" type="text" class="form-control" id="equipmentSerialNumberInput" required>
+      <div class="invalid-feedback">Please provide the serial number.</div>
+    </div>
+    <div class="mb-3">
+      <label for="equipmentImageInput" class="form-label">Image</label>
+      <input name="equipment[image_path]" type="text" class="form-control" id="equipmentImageInput" required>
+      <div class="invalid-feedback">Please provide the image path.</div>
+    </div>
+  </form>
+</div>
