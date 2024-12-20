@@ -18,7 +18,6 @@ use Lib\Validations;
 
 class Equipment extends Model
 {
-    protected array $errors = [];
     protected static string $table = 'equipments';
     protected static array $columns = [
         'name',
@@ -34,23 +33,22 @@ class Equipment extends Model
 
     public function validates(): void
     {
-        Validations::notEmpty('name', $this);
-        Validations::notEmpty('description', $this);
-        Validations::notEmpty('category', $this);
-        Validations::notEmpty('status', $this);
-        Validations::notEmpty('rental_price', $this);
-        Validations::notEmpty('location', $this);
-        Validations::notEmpty('serial_number', $this);
-        Validations::notEmpty('image_path', $this);
+        if (!is_numeric($this->rental_price)) {
+            $this->errors['rental_price'] = 'Price must be a number';
+        }
+
+        if($this->rental_price < 0) {
+            $this->errors['rental_price'] = 'Price must be greater than 0';
+        }
     }
 
     /**
-     * @return array<int, array<string, mixed>>
+     * @return array<int, static>
      */
 
     public function getAllEquipments(): array
     {
-        return $this->all();
+        return self::all();
     }
 
     /**

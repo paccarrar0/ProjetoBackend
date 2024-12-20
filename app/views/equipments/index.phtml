@@ -7,6 +7,13 @@
       </div>
     </div>
     <div class="row mt-1 equipment-list">
+      <?php if (empty($equipments)) : ?>
+        <div class="col-md-12">
+          <div class="alert alert-warning mt-3" role="alert">
+            No equipments found.
+          </div>
+        </div>
+      <?php endif; ?>
       <?php foreach ($equipments as $item): ?>
         <div class="col-md-6 my-2">
           <div class="card mb-3 equipment-item border-opacity-25" style="max-width: 540px;">

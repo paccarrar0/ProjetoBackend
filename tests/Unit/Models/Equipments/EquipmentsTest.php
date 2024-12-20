@@ -7,25 +7,7 @@ use App\Models\Equipment;
 
 class EquipmentsTest extends TestCase
 {
-    public function testValidates()
-    {
-        $equipment = new Equipment();
-        $equipment->name = '';
-        $equipment->description = '';
-        $equipment->category = '';
-        $equipment->status = '';
-        $equipment->rental_price = 0.0;
-        $equipment->location = '';
-        $equipment->serial_number = '';
-        $equipment->image_path = '';
-
-        $equipment->validates();
-
-        $errors = $equipment->getErrors();
-        $this->assertNotEmpty($errors);
-    }
-
-    public function testGetAllEquipments()
+    public function test_get_all_equipments(): void
     {
         $equipment = new Equipment();
         $allEquipments = $equipment->getAllEquipments();
@@ -33,7 +15,7 @@ class EquipmentsTest extends TestCase
         $this->assertIsArray($allEquipments);
     }
 
-    public function testGetEquipmentById()
+    public function test_get_equipment_by_id(): void
     {
         $equipment = Equipment::getEquipmentById(1);
 
@@ -52,7 +34,7 @@ class EquipmentsTest extends TestCase
         }
     }
 
-    public function testToObject()
+    public function test_to_object(): void
     {
         $data = [
             'name' => 'Excavator',
@@ -78,11 +60,80 @@ class EquipmentsTest extends TestCase
         $this->assertEquals('/images/excavator.jpg', $equipment->image_path);
     }
 
-    public function testGetErrors()
+    public function test_get_errors(): void
     {
         $equipment = new Equipment();
         $errors = $equipment->getErrors();
 
         $this->assertIsArray($errors);
+    }
+
+    public function test_create_equipment_success(): void
+    {
+        $equipment = new Equipment();
+        $equipment->name = 'Bulldozer';
+        $equipment->description = 'Powerful bulldozer';
+        $equipment->category = 'Construction';
+        $equipment->status = 'Available';
+        $equipment->rental_price = 200.0;
+        $equipment->location = 'Yard';
+        $equipment->serial_number = '67890';
+        $equipment->image_path = '/images/bulldozer.jpg';
+
+        $result = $equipment->save();
+        $this->assertTrue($result);
+    }
+
+    public function test_create_equipment_failure(): void
+    {
+        $equipment = new Equipment();
+        $equipment->name = '';
+        $equipment->description = 'Invalid Equipment';
+        $equipment->category = '';
+        $equipment->status = 'Available';
+        $equipment->rental_price = -10;
+        $equipment->location = '';
+        $equipment->serial_number = '';
+        $equipment->image_path = '';
+
+        $result = $equipment->save();
+        $this->assertFalse($result);
+        $this->assertNotEmpty($equipment->getErrors());
+    }
+
+    public function test_update_equipment_success(): void
+    {
+        $equipment = Equipment::toObject(Equipment::getEquipmentById(1));
+        $this->assertNotNull($equipment);
+
+        $equipment->name = 'Updated Name';
+        $result = $equipment->save();
+        $this->assertTrue($result);
+
+        $updatedEquipment = Equipment::toObject(Equipment::getEquipmentById(1));
+        $this->assertEquals('Updated Name', $updatedEquipment->name);
+    }
+
+    public function test_update_equipment_failure(): void
+    {
+        $equipment = Equipment::toObject(Equipment::getEquipmentById(1));
+        $this->assertNotNull($equipment);
+
+        $equipment->rental_price = -10;
+        $result = $equipment->save();
+        $this->assertFalse($result);
+        $this->assertNotEmpty($equipment->getErrors());
+    }
+
+    public function test_delete_equipment(): void
+    {
+        $equipment = Equipment::toObject(Equipment::getEquipmentById(1));
+        $this->assertNotNull($equipment);
+
+        $result = $equipment->destroy();
+        $this->assertTrue($result);
+
+        $deletedEquipment = Equipment::getEquipmentById(1);
+        $this->assertNull($deletedEquipment);
     }
 }

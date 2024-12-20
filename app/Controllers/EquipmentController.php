@@ -77,12 +77,6 @@ class EquipmentController extends Controller
 
         $equipment = Equipment::toObject(Equipment::getEquipmentById($params['id']));
 
-        if (!$equipment) {
-            FlashMessage::danger('Equipment not found');
-            $this->redirectTo(route('equipments.index'));
-            return;
-        }
-
         foreach ($equipmentData as $key => $value) {
             if ($value !== '') {
                 $equipment->$key = $value;
