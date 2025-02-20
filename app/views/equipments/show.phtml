@@ -6,16 +6,16 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-6">
-          <img src="<?= $equipment['image_path'] ?>" class="img-fluid" alt="<?= $equipment['name'] ?>">
+          <img src="<?= $equipment->image_path ?>" class="img-fluid" alt="<?= $equipment->name ?>">
         </div>
         <div class="col-md-6">
-          <h3><?= $equipment['name'] ?></h3>
-          <p><strong>Description:</strong> <?= $equipment['description'] ?></p>
-          <p><strong>Category:</strong> <?= $equipment['category'] ?></p>
-          <p><strong>Status:</strong> <?= $equipment['status'] ?></p>
-          <p><strong>Rental Price:</strong> $<?= number_format($equipment['rental_price'], 2) ?></p>
-          <p><strong>Location:</strong> <?= $equipment['location'] ?></p>
-          <p><strong>Serial Number:</strong> <?= $equipment['serial_number'] ?></p>
+          <h3><?= $equipment->name ?></h3>
+          <p><strong>Description:</strong> <?= $equipment->description ?></p>
+          <p><strong>Category:</strong> <?= $equipment->category ?></p>
+          <p><strong>Status:</strong> <?= $equipment->status ?></p>
+          <p><strong>Rental Price:</strong> $<?= number_format($equipment->rental_price, 2) ?></p>
+          <p><strong>Location:</strong> <?= $equipment->location ?></p>
+          <p><strong>Serial Number:</strong> <?= $equipment->serial_number ?></p>
         </div>
       </div>
     </div>

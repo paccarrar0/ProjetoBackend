@@ -56,7 +56,7 @@ class EquipmentController extends Controller
     {
         $params = $request->getParams();
         $equipment = new \App\Models\Equipment();
-        $equipment = $equipment->getEquipmentById($params['id']);
+        $equipment = $equipment->findById($params['id']);
 
         $this->render('equipments/show', ['equipment' => $equipment]);
     }
@@ -65,7 +65,7 @@ class EquipmentController extends Controller
     {
         $params = $request->getParams();
         $equipment = new \App\Models\Equipment();
-        $equipment = $equipment->getEquipmentById($params['id']);
+        $equipment = $equipment->findById($params['id']);
 
         $this->render('equipments/edit', ['equipment' => $equipment]);
     }
@@ -75,7 +75,7 @@ class EquipmentController extends Controller
         $params = $request->getParams();
         $equipmentData = $params['equipment'] ?? [];
 
-        $equipment = Equipment::toObject(Equipment::getEquipmentById($params['id']));
+        $equipment = Equipment::findById($params['id']);
 
         foreach ($equipmentData as $key => $value) {
             if ($value !== '') {
@@ -99,7 +99,7 @@ class EquipmentController extends Controller
     {
         $params = $request->getParams();
         $equipment = new \App\Models\Equipment();
-        $equipment = Equipment::toObject($equipment->getEquipmentById($params['id']));
+        $equipment = $equipment->findById($params['id']);
 
 
         if ($equipment->destroy()) {

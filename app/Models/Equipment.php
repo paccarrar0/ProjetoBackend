@@ -6,6 +6,7 @@ use Core\Database\ActiveRecord\Model;
 use Lib\Validations;
 
 /**
+ * @property int $id
  * @property string $name
  * @property string $description
  * @property string $category
@@ -52,32 +53,6 @@ class Equipment extends Model
     }
 
     /**
-     * @param int $id
-     * @return array<string, mixed>
-     */
-
-    public static function getEquipmentById(int $id): ?array
-    {
-        $equipment = self::findById($id);
-
-        if ($equipment === null) {
-            return null;
-        }
-
-        return [
-            'id' => $equipment->id,
-            'name' => $equipment->name,
-            'description' => $equipment->description,
-            'category' => $equipment->category,
-            'status' => $equipment->status,
-            'rental_price' => $equipment->rental_price,
-            'location' => $equipment->location,
-            'serial_number' => $equipment->serial_number,
-            'image_path' => $equipment->image_path
-        ];
-    }
-
-    /**
      * @param array<string, mixed> $data
      * @return self $equipment
      */
@@ -100,5 +75,10 @@ class Equipment extends Model
     public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    public function maintenances()
+    {
+        return $this->hasMany(Maintenance::class, 'equipment_id');
     }
 }

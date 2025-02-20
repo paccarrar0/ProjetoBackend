@@ -56,12 +56,10 @@ CREATE TABLE maintenances (
     id INT AUTO_INCREMENT PRIMARY KEY,
     equipment_id INT NOT NULL,
     description TEXT DEFAULT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE DEFAULT NULL,
     status ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CONSTRAINT fk_maintenances_equipment FOREIGN KEY (equipment_id) REFERENCES equipments(id) ON DELETE CASCADE
+    FOREIGN KEY (equipment_id) REFERENCES equipments(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Criar tabela `penalties`

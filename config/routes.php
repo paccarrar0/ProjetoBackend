@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\MaintenanceController;
 use App\Controllers\AuthenticationsController;
 use App\Controllers\EquipmentController;
 use App\Controllers\HomeController;
@@ -35,5 +36,22 @@ Route::middleware('auth')->group(function () {
         //edit
         Route::get('/admin/equipments/{id}/edit', [EquipmentController::class, 'edit'])->name('equipments.edit');
         Route::put('/admin/equipments/{id}', [EquipmentController::class, 'update'])->name('equipments.update');
+
+
+        //Maintenance Routes
+
+        //create
+        Route::get('/admin/equipments/{id}/maintenances/new', [MaintenanceController::class, 'newMaintenance'])->name('maintenances.new');
+        Route::post('/admin/equipments/{id}/maintenances', [MaintenanceController::class, 'createMaintenance'])->name('maintenances.create');
+
+        //retrieve
+        Route::get('/admin/equipments/{id}/maintenances', [MaintenanceController::class, 'index'])->name('maintenances.index');
+        
+        //delete
+        Route::delete('/admin/equipments/{id}/maintenances/{maintenance_id}', [MaintenanceController::class, 'destroyMaintenance'])->name('maintenances.destroy');
+
+        //edit
+        Route::get('/admin/equipments/{id}/maintenances/{maintenance_id}/edit', [MaintenanceController::class, 'editMaintenance'])->name('maintenances.edit');
+        Route::put('/admin/equipments/{id}/maintenances/{maintenance_id}', [MaintenanceController::class, 'updateMaintenance'])->name('maintenances.update');
     });
 });

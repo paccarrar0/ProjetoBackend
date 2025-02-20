@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <?php if (!empty($maintenances)) : ?>
+
+    <?php foreach ($maintenances as $maintenance) : ?>
+      <div class="col-md-6 my-2">
+        <div class="card mb-3 equipment-item border-opacity-25" style="max-width: 540px;">
+          <div class="row">
+            <div class="col position-relative">
+              <div class="card-body">
+                <h5 class="card-title"><?= $maintenance->id ?></h5>
+                <p class="card-text mb-1">
+                  <medium class="text-muted"><?= $maintenance->equipment_id ?></medium>
+                </p>
+                <p class="card-text">
+                  <big class="text-muted">$ <?= $maintenance->description ?>/day</big>
+                </p>
+                <p class="card-text">
+                  <big class="text-muted">$ <?= $maintenance->status ?>/day</big>
+                </p>
+              </div>
+              <div class="equipment-card-actions position-absolute">
+                <a href="<?= route('equipments.show', ['id' => $maintenance->id]) ?>" class="btn btn-link">
+                  <i class="bi bi-search"></i>
+                </a>
+                <a href="<?= route('equipments.edit', ['id' => $maintenance->id]) ?>" class="btn btn-link">
+                  <i class="bi bi-pencil"></i>
+                </a>
+                <form action="<?= route('equipments.destroy', ['id' => $maintenance->id]) ?>" method="POST" class="m-0">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button type="submit" class="btn btn-link"><i class="bi bi-trash3"></i></button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <?php endforeach; ?>
+  <?php else : ?>
+    <p class="text-center mt-5">No maintenances found.</p>
+  <?php endif; ?>
+</div>
