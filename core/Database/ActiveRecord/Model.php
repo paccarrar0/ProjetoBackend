@@ -273,7 +273,11 @@ abstract class Model
         $stmt->execute();
         $resp = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $resp;
+        foreach ($resp as $row) {
+            $models[] = new static($row);
+        }
+
+        return $models;
     }
 
     public static function paginate(int $page = 1, int $per_page = 10, string $route = null): Paginator

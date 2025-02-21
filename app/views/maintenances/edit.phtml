@@ -1,0 +1,32 @@
+<div class="container mt-5">
+  <form class="mb-5" action="<?= route('maintenances.update', ['id' => $maintenance->id, 'equipment_id' => $equipment->id]) ?>" method="POST" class="mt-1 needs-validation" id="editMaintenanceForm" novalidate>
+    <input type="hidden" name="_method" value="PUT">
+    <div class="d-flex justify-content-between mb-4 mt-5">
+      <h1>Edit Maintenance</h1>
+      <div class="w-10 align-content-center">
+        <button type="submit" class="btn btn-primary btn-block" id="newSubmitBtn">Submit</button>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="maintenanceDescriptionInput" class="form-label">Maintenance Description</label>
+      <textarea name="maintenance[description]" type="text" class="form-control" id="maintenanceDescriptionInput"><?= trim($maintenance->description) ?></textarea>
+      <div class="invalid-feedback">Please provide a description.</div>
+    </div>
+    <div class="mb-3">
+      <label for="maintenanceStatusInput" id="maintenanceStatusInput" class="form-label">Status</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="maintenance[status]" id="maintenancePendingRadio" value="pending" <?php if ($maintenance->status == 'pending') echo 'checked' ?>>
+        <label class="form-check-label" for="maintenancePendingRadio">Pending</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="maintenance[status]" id="maintenanceInProgressRadio" value="in_progress" <?php if ($maintenance->status == 'in_progress') echo 'checked' ?>>
+        <label class="form-check-label" for="maintenanceMaintenanceRadio">In Progress</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="maintenance[status]" id="maintenanceCompletedRadio" value="completed" <?php if ($maintenance->status == 'complete') echo 'checked' ?>>
+        <label class="form-check-label" for="maintenanceInUseRadio">Completed</label>
+      </div>
+    </div>
+  </form>
+</div>

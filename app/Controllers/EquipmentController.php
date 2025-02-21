@@ -42,7 +42,6 @@ class EquipmentController extends Controller
         $params = $request->getParams();
         $equipment = new Equipment($params['equipment']);
 
-
         if ($equipment->save()) {
             FlashMessage::success('Equipment created successfully');
             $this->redirectTo(route('equipments.index'));
@@ -56,7 +55,7 @@ class EquipmentController extends Controller
     {
         $params = $request->getParams();
         $equipment = new \App\Models\Equipment();
-        $equipment = $equipment->getEquipmentById($params['id']);
+        $equipment = $equipment->findById($params['id']);
 
         $this->render('equipments/show', ['equipment' => $equipment]);
     }
@@ -65,7 +64,7 @@ class EquipmentController extends Controller
     {
         $params = $request->getParams();
         $equipment = new \App\Models\Equipment();
-        $equipment = $equipment->getEquipmentById($params['id']);
+        $equipment = $equipment->findById($params['id']);
 
         $this->render('equipments/edit', ['equipment' => $equipment]);
     }
@@ -75,7 +74,8 @@ class EquipmentController extends Controller
         $params = $request->getParams();
         $equipmentData = $params['equipment'] ?? [];
 
-        $equipment = Equipment::toObject(Equipment::getEquipmentById($params['id']));
+
+        $equipment = Equipment::findById($params['id']);
 
         foreach ($equipmentData as $key => $value) {
             if ($value !== '') {
@@ -84,6 +84,7 @@ class EquipmentController extends Controller
         }
 
         $equipment->serial_number = $equipment->serial_number;
+
 
         if ($equipment->save()) {
             FlashMessage::success('Equipment updated successfully');
@@ -99,7 +100,7 @@ class EquipmentController extends Controller
     {
         $params = $request->getParams();
         $equipment = new \App\Models\Equipment();
-        $equipment = Equipment::toObject($equipment->getEquipmentById($params['id']));
+        $equipment = $equipment->findById($params['id']);
 
 
         if ($equipment->destroy()) {

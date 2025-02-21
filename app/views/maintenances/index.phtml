@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="d-flex justify-content-between">
+      <h1>Maintenances</h1>
+      <div class="w-10 align-content-center">
+        <a href="<?php echo route('maintenances.new', ['id' => $equipment->id]) ?>" type="submit" class="btn btn-primary btn-block">New</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mt-1 maintenance-list justify-content-center">
+    <?php if (empty($maintenances)) : ?>
+      <div class="col-md-12">
+        <div class="alert alert-warning mt-3" role="alert">
+          No maintenances found.
+        </div>
+      </div>
+    <?php endif; ?>
+
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+      <?php foreach ($maintenances as $maintenance) : ?>
+        <div class="col">
+          <div class="card mb-3 maintenance-item border-opacity-25">
+            <div class="card-body">
+              <p class="card-text">
+                <big class="text-muted"><?= $maintenance->description ?></big>
+              </p>
+              <p class="card-text">
+                <big class="text-muted">Status: <?= $maintenance->status ?></big>
+              </p>
+            </div>
+            <div class="position-absolute bottom-0 end-0 p-2">
+              <a href="<?= route('maintenances.edit', ['id' => $maintenance->id, 'equipment_id' => $equipment->id]) ?>" class="btn btn-link p-1">
+                <i class="bi bi-pencil"></i>
+              </a>
+              <form action="<?= route('maintenances.destroy', ['id' => $maintenance->id, 'equipment_id' => $equipment->id]) ?>" method="POST" class="m-0 d-inline">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn btn-link p-1"><i class="bi bi-trash3"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</div>
