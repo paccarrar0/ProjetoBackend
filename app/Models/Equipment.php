@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Core\Database\ActiveRecord\HasMany;
 use Core\Database\ActiveRecord\Model;
 use Lib\Validations;
 
@@ -57,17 +58,6 @@ class Equipment extends Model
      * @return self $equipment
      */
 
-    public static function toObject(array $data): self
-    {
-        $equipment = new self();
-        foreach ($data as $key => $value) {
-            if ($key !== 'created_at' && $key !== 'updated_at') {
-                $equipment->$key = $value;
-            }
-        }
-        return $equipment;
-    }
-
     /**
      * @return array<string, string>
      */
@@ -77,7 +67,7 @@ class Equipment extends Model
         return $this->errors;
     }
 
-    public function maintenances()
+    public function maintenances(): HasMany
     {
         return $this->hasMany(Maintenance::class, 'equipment_id');
     }

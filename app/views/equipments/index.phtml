@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-5">
   <div class="row">
     <div class="d-flex justify-content-between">
       <h1>Equipments</h1>
@@ -6,24 +6,28 @@
         <a href="<?php echo route('equipments.new') ?>" type="submit" class="btn btn-primary btn-block">New</a>
       </div>
     </div>
-    <div class="row mt-1 equipment-list">
-      <?php if (empty($equipments)) : ?>
-        <div class="col-md-12">
-          <div class="alert alert-warning mt-3" role="alert">
-            No equipments found.
-          </div>
+  </div>
+
+  <div class="row mt-1 equipment-list justify-content-center">
+    <?php if (empty($equipments)) : ?>
+      <div class="col-md-12">
+        <div class="alert alert-warning mt-3" role="alert">
+          No equipments found.
         </div>
-      <?php endif; ?>
+      </div>
+    <?php endif; ?>
+
+    <div class="row row-cols-1 row-cols-md-2 g-3">
       <?php foreach ($equipments as $item): ?>
-        <div class="col-md-6 my-2">
-          <div class="card mb-3 equipment-item border-opacity-25" style="max-width: 540px;">
+        <div class="col">
+          <div class="card mb-3 equipment-item border-opacity-25">
             <div class="row">
               <div class="col card-img-container">
                 <img src="<?= $item->image_path ?>" class="card-img" alt="...">
               </div>
               <div class="col position-relative">
                 <div class="card-body">
-                  <h5 class="card-title"><?= $item->name?></h5>
+                  <h5 class="card-title"><?= $item->name ?></h5>
                   <p class="card-text mb-1">
                     <medium class="text-muted"><?= $item->category ?></medium>
                   </p>
@@ -53,3 +57,4 @@
       <?php endforeach; ?>
     </div>
   </div>
+</div>

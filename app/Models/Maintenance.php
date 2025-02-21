@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use Core\Database\ActiveRecord\BelongsTo;
 use Core\Database\ActiveRecord\Model;
+use Lib\Validations;
+use PHPUnit\TextUI\XmlConfiguration\Validator;
 
 /**
  * @property int $id
@@ -15,20 +18,25 @@ class Maintenance extends Model
 {
     protected static string $table = 'maintenances';
     protected static array $columns = [
-        'id',
         'equipment_id',
         'description',
         'status',
     ];
+    protected array $errors = [];
 
-    public function validates(): void {}
+    public function validates(): void
+    {
+        Validations::notEmpty('description', $this);
+    }
 
-    
-
-    public function equipment()
+    public function equipment(): BelongsTo
     {
         return $this->belongsTo(Equipment::class, 'equipment_id');
     }
+
+    /**
+     * @return array<string, string>
+     */
 
     public function getErrors(): array
     {

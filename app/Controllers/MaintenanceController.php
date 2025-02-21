@@ -26,58 +26,50 @@ class MaintenanceController extends Controller
 
     public function index(Request $request): void
     {
-
         $params = $request->getParams();
-        $equipment = new \App\Models\Equipment();
-        $equipment = $equipment->findById($params['id']);
+        $equipment = Equipment::findById($params['id']);
 
-        dd($equipment);
+        $maintenance = $equipment->maintenances()->paginate();
+        $maintenances = $maintenance->registers();
 
-        $maintenance = new \App\Models\Maintenance;
-        $maintenances = $equipment->maintenances();
 
-        $this->render('maintenances/index', ['maintenances' => $maintenances]);
+        $this->render('maintenances/index', ['maintenances' => $maintenances, 'equipment' => $equipment]);
     }
 
-    public function new(): void
+    public function new(Request $request): void
     {
-        $this->render('maintenances/new');
+        $params = $request->getParams();
+        $equipment = Equipment::findById($params['id']);
+
+        $this->render('maintenances/new', ['equipment' => $equipment]);
     }
 
     public function create(Request $request): void
     {
-
         $params = $request->getParams();
-        $maintenance = new Maintenance($params['maintenance']);
+        $equipment = Equipment::findById($params['id']);
 
+        $maintenance = $equipment->maintenances()->new($params['maintenance']);
+        $description = trim($_POST['maintenance']['description']);
+        $maintenance->description = $description;
 
         if ($maintenance->save()) {
-            FlashMessage::success('maintenance created successfully');
-            $this->redirectTo(route('maintenances.index'));
+            FlashMessage::success('Maintenance created successfully');
+            $this->redirectTo(route('maintenances.index', ['id' => $equipment->id]));
         } else {
             FlashMessage::danger('Failed to create maintenance');
-            $this->redirectTo(route('maintenances.new'));
+            $this->redirectTo(route('maintenances.new', ['id' => $equipment->id]));
         }
     }
-
-    /*
-    public function show(Request $request): void
-    {
-        $params = $request->getParams();
-        $maintenance = new \App\Models\maintenance();
-        $maintenance = $maintenance->findById($params['id']);
-
-        $this->render('maintenances/show', ['maintenance' => $maintenance]);
-    }
-    */
 
     public function edit(Request $request): void
     {
         $params = $request->getParams();
         $maintenance = new \App\Models\Maintenance();
         $maintenance = $maintenance->findById($params['id']);
+        $equipment = Equipment::findById($maintenance->equipment_id);
 
-        $this->render('maintenances/edit', ['maintenance' => $maintenance]);
+        $this->render('maintenances/edit', ['maintenance' => $maintenance, 'equipment' => $equipment]);
     }
 
     public function update(Request $request): void
@@ -85,7 +77,8 @@ class MaintenanceController extends Controller
         $params = $request->getParams();
         $maintenanceData = $params['maintenance'] ?? [];
 
-        $maintenance = Maintenance::findById($params['id']);
+        $maintenance = Maintenance::findById($params['id']) ?? [];
+        $equipment = Equipment::findById($maintenance->equipment_id);
 
         foreach ($maintenanceData as $key => $value) {
             if ($value !== '') {
@@ -93,14 +86,12 @@ class MaintenanceController extends Controller
             }
         }
 
-        $maintenance->serial_number = $maintenance->serial_number;
-
         if ($maintenance->save()) {
-            FlashMessage::success('maintenance updated successfully');
-            $this->redirectTo(route('maintenances.index'));
+            FlashMessage::success('Maintenance updated successfully');
+            $this->redirectTo(route('maintenances.index', ['id' => $equipment->id]));
         } else {
-            FlashMessage::danger('Failed to update maintenance');
-            $this->redirectTo(route('maintenances.edit', ['id' => $params['id']]));
+            FlashMessage::danger('Failed to update equipment');
+            $this->redirectTo(route('maintenances.edit', ['id' => $maintenance->id]));
         }
     }
 
@@ -113,11 +104,11 @@ class MaintenanceController extends Controller
 
 
         if ($maintenance->destroy()) {
-            FlashMessage::success('maintenance deleted successfully');
-            $this->redirectTo(route('maintenances.index'));
+            FlashMessage::success('Maintenance deleted successfully');
+            $this->redirectTo(route('maintenances.index', ['id' => $params['equipment_id']]));
         } else {
             FlashMessage::danger('Failed to delete maintenance');
-            $this->redirectTo(route('maintenances.index'));
+            $this->redirectTo(route('maintenances.index', ['id' => $params['equipment_id']]));
         }
     }
 }

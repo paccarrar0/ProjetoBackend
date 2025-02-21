@@ -42,7 +42,6 @@ class EquipmentController extends Controller
         $params = $request->getParams();
         $equipment = new Equipment($params['equipment']);
 
-
         if ($equipment->save()) {
             FlashMessage::success('Equipment created successfully');
             $this->redirectTo(route('equipments.index'));
@@ -75,6 +74,7 @@ class EquipmentController extends Controller
         $params = $request->getParams();
         $equipmentData = $params['equipment'] ?? [];
 
+
         $equipment = Equipment::findById($params['id']);
 
         foreach ($equipmentData as $key => $value) {
@@ -84,6 +84,7 @@ class EquipmentController extends Controller
         }
 
         $equipment->serial_number = $equipment->serial_number;
+
 
         if ($equipment->save()) {
             FlashMessage::success('Equipment updated successfully');

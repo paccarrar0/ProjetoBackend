@@ -41,17 +41,30 @@ Route::middleware('auth')->group(function () {
         //Maintenance Routes
 
         //create
-        Route::get('/admin/equipments/{id}/maintenances/new', [MaintenanceController::class, 'newMaintenance'])->name('maintenances.new');
-        Route::post('/admin/equipments/{id}/maintenances', [MaintenanceController::class, 'createMaintenance'])->name('maintenances.create');
+        Route::get('/admin/equipments/{id}/maintenances/new', [MaintenanceController::class, 'new'])
+            ->name('maintenances.new');
+
+        Route::post('/admin/equipments/{id}/maintenances', [MaintenanceController::class, 'create'])
+            ->name('maintenances.create');
 
         //retrieve
-        Route::get('/admin/equipments/{id}/maintenances', [MaintenanceController::class, 'index'])->name('maintenances.index');
-        
+        Route::get('/admin/equipments/{id}/maintenances', [MaintenanceController::class, 'index'])
+            ->name('maintenances.index');
+
         //delete
-        Route::delete('/admin/equipments/{id}/maintenances/{maintenance_id}', [MaintenanceController::class, 'destroyMaintenance'])->name('maintenances.destroy');
+        Route::delete(
+            '/admin/equipments/{id}/maintenances/{maintenance_id}',
+            [MaintenanceController::class, 'destroy']
+        )->name('maintenances.destroy');
 
         //edit
-        Route::get('/admin/equipments/{id}/maintenances/{maintenance_id}/edit', [MaintenanceController::class, 'editMaintenance'])->name('maintenances.edit');
-        Route::put('/admin/equipments/{id}/maintenances/{maintenance_id}', [MaintenanceController::class, 'updateMaintenance'])->name('maintenances.update');
+        Route::get(
+            '/admin/equipments/{equipment_id}/maintenances/{id}/edit',
+            [MaintenanceController::class, 'edit']
+        )->name('maintenances.edit');
+        Route::put(
+            '/admin/equipments/{equipment_id}/maintenances',
+            [MaintenanceController::class, 'update']
+        )->name('maintenances.update');
     });
 });

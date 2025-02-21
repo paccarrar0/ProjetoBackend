@@ -1,0 +1,32 @@
+<div class="container mt-5">
+  <form class="mb-5" action="<?php echo route('maintenances.create', ['id' => $equipment->id]) ?>" method="POST" class="mt-1 needs-validation" id="newEquipmentForm" novalidate>
+    <div class="d-flex justify-content-between mb-4 mt-5">
+      <h1>New Maintenance</h1>
+      <div class="w-10 align-content-center">
+        <button type="submit" class="btn btn-primary btn-block" id="newSubmitBtn">Submit</button>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="maintenanceDescriptionInput" class="form-label">Maintenance Description</label>
+      <textarea name="maintenance[description]" type="text" class="form-control" id="maintenanceDescriptionInput" aria-describedby="nameHelp" required>
+
+      </textarea>
+    </div>
+    <div class="mb-3">
+      <label for="maintenanceStatusInput" id="maintenanceStatusInput" class="form-label">Status</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="maintenance[status]" id="maintenancePendingRadio" value="pending" checked>
+        <label class="form-check-label" for="maintenancePendingRadio">Pending</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="maintenance[status]" id="maintenanceInProgressRadio" value="in_progress">
+        <label class="form-check-label" for="maintenanceMaintenanceRadio">In Progress</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="maintenance[status]" id="maintenanceCompletedRadio" value="completed">
+        <label class="form-check-label" for="maintenanceInUseRadio">Completed</label>
+      </div>
+    </div>
+  </form>
+</div>
