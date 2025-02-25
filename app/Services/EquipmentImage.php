@@ -5,6 +5,10 @@ namespace App\Services;
 use Core\Constants\Constants;
 use Core\Database\ActiveRecord\Model;
 
+/**
+ * @property string $image_path
+ */
+
 class EquipmentImage
 {
     /** @var array<string, mixed> $image */
@@ -12,7 +16,8 @@ class EquipmentImage
 
     public function __construct(
         private Model $model
-    ) {}
+    ) {
+    }
 
     public function path(): string
     {
@@ -40,6 +45,7 @@ class EquipmentImage
             move_uploaded_file($this->getTmpFilePath(), $this->getAbsoluteFilePath());
             return true;
         }
+        return false;
     }
 
     private function getTmpFilePath(): string
@@ -105,6 +111,10 @@ class EquipmentImage
             rmdir($directory);
         }
     }
+
+    /**
+     * @param array<string> $image
+     */
 
     private function isValidImage(array $image): bool
     {

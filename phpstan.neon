@@ -13,3 +13,4 @@ parameters:
     - '#Unsafe usage of new static\(\)\.#'
     - '#Call to an undefined method ReflectionType::getName\(\).#'
     - '#Access to an undefined property .+::\$description#'
+    - '#Access to an undefined property .+::\$image_path#'
