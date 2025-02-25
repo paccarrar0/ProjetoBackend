@@ -85,6 +85,7 @@ class EquipmentController extends Controller
 
         $equipment->serial_number = $equipment->serial_number;
 
+
         if ($equipment->save()) {
             FlashMessage::success('Equipment updated successfully');
             $this->redirectTo(route('equipments.index'));
