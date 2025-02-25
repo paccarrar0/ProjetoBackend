@@ -52,6 +52,13 @@ $ ./run db:reset
 $ ./run db:populate
 ```
 
+#### Fix Permission Issues
+
+```
+$ sudo chown www-data:www-data public/assets/uploads
+
+```
+
 #### Run the tests
 
 ```
