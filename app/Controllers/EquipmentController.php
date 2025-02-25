@@ -85,7 +85,6 @@ class EquipmentController extends Controller
 
         $equipment->serial_number = $equipment->serial_number;
 
-
         if ($equipment->save()) {
             FlashMessage::success('Equipment updated successfully');
             $this->redirectTo(route('equipments.index'));
@@ -102,6 +101,7 @@ class EquipmentController extends Controller
         $equipment = new \App\Models\Equipment();
         $equipment = $equipment->findById($params['id']);
 
+        $this->deleteImage($request);
 
         if ($equipment->destroy()) {
             FlashMessage::success('Equipment deleted successfully');
@@ -110,5 +110,32 @@ class EquipmentController extends Controller
             FlashMessage::danger('Failed to delete equipment');
             $this->redirectTo(route('equipments.index'));
         }
+    }
+
+
+    public function uploadImage(Request $request): void
+    {
+        $params = $request->getParams();
+        $equipment = new \App\Models\Equipment();
+        $equipment = $equipment->findById($params['id']);
+
+        $image = $_FILES['user_avatar'];
+
+        if ($equipment->equipmentImage()->update($image)) {
+            FlashMessage::success('Image uploaded successfully');
+            $this->redirectTo(route('equipments.index'));
+        } else {
+            FlashMessage::danger('Failed to upload image. Wrong file format or size exceeded');
+            $this->redirectTo(route('equipments.index'));
+        }
+    }
+
+    public function deleteImage(Request $request): void
+    {
+        $params = $request->getParams();
+        $equipment = new \App\Models\Equipment();
+        $equipment = $equipment->findById($params['id']);
+
+        $equipment->equipmentImage()->delete();
     }
 }

@@ -12,31 +12,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-/*
 document.addEventListener("DOMContentLoaded", function () {
-  const imagePreviewInput = document.getElementById("image_preview_input");
-  const preview = document.getElementById("image_preview");
-  const imagePreviewSubmit = document.getElementById("image_preview_submit");
+  document.querySelectorAll(".upload-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      let id = this.getAttribute("data-id"); // Pega o ID correto
+      let fileInput = document.getElementById("imageUploadInput" + id);
 
-  if (!(imagePreviewInput && preview)) return;
-
-  imagePreviewInput.style.display = "none";
-  imagePreviewSubmit.style.display = "none";
-
-  preview.addEventListener("click", function () {
-    imagePreviewInput.click();
-  });
-
-  imagePreviewInput.addEventListener("change", function (event) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        document.getElementById("image_preview").src = e.target.result;
-        imagePreviewSubmit.style.display = "block";
-      };
-      reader.readAsDataURL(file);
-    }
+      if (fileInput) {
+        fileInput.click(); // Abre o seletor de arquivos apenas do equipamento clicado
+      } else {
+        console.error("Elemento não encontrado: imageUploadInput" + id);
+      }
+    });
   });
 });
-*/

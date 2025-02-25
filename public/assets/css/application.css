@@ -73,3 +73,23 @@ nav.navbar {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   background-color: white;
 }
+
+.upload-btn {
+  background: none;  /* Remove fundo */
+  border: none;      /* Remove borda */
+  padding: 0;        /* Remove espaço extra */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;  /* Ajuste conforme necessário */
+  height: 40px; /* Ajuste conforme necessário */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* Mantém o cursor como botão */
+}
+
+.upload-btn i {
+  font-size: 1.2rem; /* Ajuste conforme necessário */
+  pointer-events: none; /* Faz com que o clique vá para o botão e não para o ícone */
+}

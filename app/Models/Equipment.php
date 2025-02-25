@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Core\Database\ActiveRecord\HasMany;
 use Core\Database\ActiveRecord\Model;
-use Lib\Validations;
+use App\Services\EquipmentImage;
 
 /**
  * @property int $id
@@ -70,5 +70,10 @@ class Equipment extends Model
     public function maintenances(): HasMany
     {
         return $this->hasMany(Maintenance::class, 'equipment_id');
+    }
+
+    public function equipmentImage(): EquipmentImage
+    {
+        return new EquipmentImage($this);
     }
 }

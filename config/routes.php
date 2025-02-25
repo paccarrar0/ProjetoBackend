@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
         //create
         Route::get('/admin/equipments/new', [EquipmentController::class, 'new'])->name('equipments.new');
         Route::post('/admin/equipments', [EquipmentController::class, 'create'])->name('equipments.create');
+        Route::post('/admin/equipments/{id}/image', [EquipmentController::class, 'uploadImage'])
+            ->name('equipments.uploadImage');
 
         //retrieve
         Route::get('/admin/equipments', [EquipmentController::class, 'index'])->name('equipments.index');
