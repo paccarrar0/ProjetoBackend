@@ -14,7 +14,6 @@ body {
   padding: 10px;
 }
 
-
 .equipment-item {
   padding: 8px;
   border: 1px rgb(203, 203, 203) solid;
@@ -55,7 +54,6 @@ body {
 .equipment-card-actions {
   display: flex;
   right: 1rem;
-  justify-content: space-between;
   bottom: 0;
 }
 

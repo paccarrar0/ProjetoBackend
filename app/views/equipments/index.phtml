@@ -23,7 +23,13 @@
           <div class="card mb-3 equipment-item border-opacity-25">
             <div class="row">
               <div class="col card-img-container">
-                <img src="<?= $item->image_path ?>" class="card-img" alt="...">
+                <form action="<?= route('equipments.uploadImage', ['id' => $item->id]) ?>" method="POST" enctype="multipart/form-data" id="imageUploadForm<?= $item->id ?>">
+
+                  <input id="imageUploadInput<?= $item->id ?>" type="file" name="user_avatar" style="display: none;">
+
+                  <img id="previewImage<?= $item->id ?>" src="<?= $item->equipmentImage()->path() ?>" class="card-img" alt="Equipment Image" style="cursor: pointer;" onclick="document.getElementById('imageUploadInput<?= $item->id ?>').click()">
+
+                </form>
               </div>
               <div class="col position-relative">
                 <div class="card-body">
@@ -36,6 +42,9 @@
                   </p>
                 </div>
                 <div class="equipment-card-actions position-absolute">
+                  <button class="btn btn-link upload-btn" type="button" onclick="document.getElementById('imageUploadForm<?= $item->id ?>').submit()">
+                    <i class="bi bi-upload"></i>
+                  </button>
                   <a href="<?= route('maintenances.index', ['id' => $item->id]) ?>" class="btn btn-link">
                     <i class="bi bi-wrench"></i>
                   </a>
